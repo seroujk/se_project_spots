@@ -22,7 +22,7 @@ Each image that the user shares has a "like button" functionality enabling other
 
 This webpage is deployed to GitHub Pages
 
-- Deployment Link: 
+- Deployment Link: https://seroujk.github.io/se_project_spots/
 
 - Link to video explaining the project:
   

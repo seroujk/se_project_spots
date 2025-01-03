@@ -1,4 +1,3 @@
-
 .card__content {
   display: flex;
   align-items: center;
@@ -8,13 +7,14 @@
 
 .card__title {
   margin: 0;
-  font-family: "Poppins Regular", Arial, Helvetica, sans-serif;
+  font-family: "Poppins Medium", Arial, Helvetica, sans-serif;
+  color: #212121;
   font-size: 20px;
   line-height: 24px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 300px; 
+  max-width: 375px;
 }
 
 .card__image {
@@ -33,6 +33,7 @@
   background-color: transparent;
   opacity: 40%;
   transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .card__like-btn:hover {
