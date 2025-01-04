@@ -24,5 +24,5 @@ This webpage is deployed to GitHub Pages
 
 - Deployment Link: https://seroujk.github.io/se_project_spots/
 
-- Link to video explaining the project:
+- Link to video explaining the project: https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link
   
