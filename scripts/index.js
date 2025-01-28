@@ -25,6 +25,8 @@ const initialCards = [
   }),
 ];
 
+//Generating Cards
+
 const cardsList = document.querySelector(".cards__list");
 
 function getCardElement(data) {
@@ -39,7 +41,6 @@ function getCardElement(data) {
 
   //Declare a varuabe for the card Image
   const cardImage = cardElement.querySelector(".card__image");
-  
 
   //Populate the element with the current data from the list
   cardTitle.textContent = data.name;
@@ -54,36 +55,41 @@ for (let i = 0; i < initialCards.length; i++) {
   cardsList.append(card);
 }
 
+//The Edit Profile Functionality
+
 let modal = document.querySelector("#edit-modal");
 let editBtn = document.querySelector(".profile__edit-btn");
 let closeBtn = document.querySelector(".modal__close-btn");
 let submitBtn = document.querySelector(".modal__submit-btn");
 
-//open the modal
-editBtn.addEventListener("click", function showModal() {
-  modal.classList.add("modal_opened");
-});
-// hide the modal
-closeBtn.addEventListener("click", function hideModal() {
-  modal.classList.remove("modal_opened");
-});
-// submit the modal and close it
-submitBtn.addEventListener("click", function closeModal() {
-  modal.classList.remove("modal_opened");
-});
-
 const profileFormElement = document.querySelector(".modal__form");
-
 const nameInput = profileFormElement.querySelector("#name");
 const jobInput = profileFormElement.querySelector("#description");
-
 const profileNameElement = document.querySelector(".profile__name");
 const profileJobElement = document.querySelector(".profile__description");
 
-//Insert the current profile name value into the form's input field
-nameInput.value = profileNameElement.textContent;
-//Insert the current profile job value into the form's input field
-jobInput.value = profileJobElement.textContent;
+//Opening the profile
+// Add event listener for when the edit button is clicked
+// Call the function that opens the profile edit form
+editBtn.addEventListener("click", showModal);
+// In the function add a class that will set the modals visibility to visible
+function showModal() {
+  modal.classList.add("modal_opened");
+  //Insert the current profile name value into the form's input field
+  nameInput.value = profileNameElement.textContent;
+  //Insert the current profile job value into the form's input field
+  jobInput.value = profileJobElement.textContent;
+}
+
+// Closing the modal
+// Add event listener for when the close button is clicked
+// Call the function that closes the profile edit form
+closeBtn.addEventListener("click", closeModal);
+// In the function remove the class that set the modals visibility to visible
+// This will make the form invisible again
+function closeModal() {
+  modal.classList.remove("modal_opened");
+}
 
 // The form submission handler. Note that its name
 // starts with a verb and concisely describes what it does.
@@ -100,6 +106,7 @@ function handleProfileFormSubmit(evt) {
   profileNameElement.textContent = nameInputValue;
   profileJobElement.textContent = jobInputValue;
   // TODO: Close the modal.
+  closeModal();
 }
 
 // Connect the handler to the form, so it will watch for the submit event.
