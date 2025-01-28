@@ -17,6 +17,7 @@ Each image that the user shares has a "like button" functionality enabling other
 - HTML
 - CSS
 - Responsive Design
+- Javascript
 
 ## Deployment
 
@@ -24,5 +25,5 @@ This webpage is deployed to GitHub Pages
 
 - Deployment Link: https://seroujk.github.io/se_project_spots/
 
-- Link to video explaining the project: https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link
+- Link to video explaining the project phase 1: https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link
   
