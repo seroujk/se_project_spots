@@ -1,6 +1,6 @@
 # Project 3: Spots
 
-Welcome to Spots! The premier desination for sharing your beautiful images. Wanted to share  your images on a website that fits all screens? Well now you can. Have fun!
+Welcome to Spots! The premier desination for sharing your beautiful images. Wanted to share  your images on a website that fits all screen size perfectly? Well now you can. Have fun!
 
 ## Description
 
