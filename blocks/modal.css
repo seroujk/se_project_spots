@@ -10,11 +10,15 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  opacity:0;
+  transition:visibility 0s linear 0.5s,opacity 0.5s linear;
   padding: 0 16px;
 }
 
 .modal_opened {
   visibility: visible;
+  opacity:1;
+  transition-delay:0s;
 }
 
 .modal__container {
@@ -27,7 +31,6 @@
   font-weight: 400;
   border-radius: 8px;
   box-sizing: border-box;
-
 }
 
 .modal__close-btn {
@@ -48,7 +51,7 @@
 }
 
 .modal__close-btn:hover {
-    opacity: 100%;
+  opacity: 100%;
 }
 
 .modal__title {
@@ -56,8 +59,6 @@
   line-height: 32px;
   font-size: 32px;
   color: rgba(33, 33, 33, 1);
-
-
 }
 
 .modal__form {
@@ -119,13 +120,64 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.modal__submit-btn:hover{
-    opacity: 70%;
+.modal__submit-btn:hover {
+  opacity: 70%;
+}
+
+.preview-modal__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-modal__image {
+  position: relative;
+  max-width: 80vw;
+  max-height: 80vh;
+  border-radius: 8px;
+  display: block;
+  position: relative;
+}
+
+
+.preview-modal__close-btn {
+  position: absolute;
+  left: 100%; 
+  margin-left: 12.5px;
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-image: url(../images/preview-close.svg);
+  background-position: center;
+  cursor: pointer;
+  opacity: 100%;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.preview-modal__close-btn:hover{
+  opacity: 40%;
+}
+
+
+.preview-modal__caption {
+  display: inline-flex;
+  align-self: flex-start;
+  color: white;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: rgba(33, 33, 33, 1);
+  margin: 8px 0 0;
+  padding: 4px 8px;
+  border-radius: 8px;
 }
 
 @media screen and (max-width: 627px) {
-
-  .modal{
+  .modal {
     padding: 0 10px;
   }
   .modal__container {
@@ -150,17 +202,25 @@
 
   .modal__input::placeholder {
     font-size: 16px;
-    line-height: 16px; 
+    line-height: 16px;
   }
 
   .modal__submit-btn {
     width: 100%;
   }
 
-  .modal__close-btn{
+  .modal__close-btn {
     top: 12px;
     right: 12px;
   }
 
+  .preview-modal__content{
+    justify-content: flex-start;
+  }
 
+  .preview-modal__close-btn{
+    position: static;
+    align-self: flex-end;
+   
+  }
 }

@@ -47,67 +47,160 @@ function getCardElement(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
+  //Declare a variable for the preview modal
+  const previewModal = document.querySelector("#preview-modal");
+  //Declare a variable for the preivew modal image
+  const previewImage = previewModal.querySelector(".preview-modal__image");
+
+  //Delcare a variable for the preview modal caption
+  const previewCaption = previewModal.querySelector(".preview-modal__caption");
+  
+  //Declare a variable for the preview close button
+  const previewCloseBtn = previewModal.querySelector(
+    ".preview-modal__close-btn"
+  );
+  //Open the preview modal when the image is clicked
+  cardImage.addEventListener("click", () => {
+    //Assign its src value to the current cards src value
+    previewImage.src = data.link;
+    previewImage.alt = data.name;
+    previewCaption.textContent = data.name;
+    
+    openModal(previewModal);
+  });
+  //Close the preview modal when the close button is clicked
+  previewCloseBtn.addEventListener("click", () => {
+    closeModal(previewModal);
+  });
+
+  // Declare a variable for the card like button
+  const cardLikeBtn = cardElement.querySelector(".card__like-btn");
+
+  // Listen for a click event to change the color of the button
+  cardLikeBtn.addEventListener("click", () => {
+    console.log("Like clicked");
+    cardLikeBtn.classList.toggle("card__like-btn_liked");
+  });
+
+  // Declare a variable for the card delete button
+  const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
+  //Listen for a click event to delete the card
+  cardDeleteBtn.addEventListener("click", (event) => {
+    event.target.closest(".card").remove();
+  });
+
   return cardElement;
 }
 
-for (let i = 0; i < initialCards.length; i++) {
-  const card = getCardElement(initialCards[i]);
+// use foreach method to initalize the cards
+// this way we don't have to worry about the length of the inital card array
+// also the code is more concise
+initialCards.forEach((item) => {
+  const card = getCardElement(item);
   cardsList.append(card);
-}
+});
 
-//The Edit Profile Functionality
+//The Edit Profile Modal
 
-let modal = document.querySelector("#edit-modal");
-let editBtn = document.querySelector(".profile__edit-btn");
-let closeBtn = document.querySelector(".modal__close-btn");
-let submitBtn = document.querySelector(".modal__submit-btn");
+let profileModal = document.querySelector("#profile-edit-modal");
+let editProfileBtn = document.querySelector(".profile__edit-btn");
+let closeProfileBtn = document.querySelector(".edit-profile__close-btn");
+let submiProfileBtn = document.querySelector(".edit-profile__close-btn");
 
-const profileFormElement = document.querySelector(".modal__form");
+const profileFormElement = document.querySelector(".edit-profile-modal__form");
 const nameInput = profileFormElement.querySelector("#name");
 const jobInput = profileFormElement.querySelector("#description");
 const profileNameElement = document.querySelector(".profile__name");
 const profileJobElement = document.querySelector(".profile__description");
 
-//Opening the profile
-// Add event listener for when the edit button is clicked
-// Call the function that opens the profile edit form
-editBtn.addEventListener("click", showModal);
-// In the function add a class that will set the modals visibility to visible
-function showModal() {
+// The New Post Modal
+
+let newPostModal = document.querySelector("#new-post-modal");
+let newPostBtn = document.querySelector(".profile__add-btn");
+let newPostCloseBtn = document.querySelector(".new-post__close-btn");
+let newPostSubmitBtn = document.querySelector(".new-post__submit-btn");
+
+const newPostFormElement = document.querySelector(".new-post-modal__form");
+const imageLinkInput = newPostFormElement.querySelector("#image-link");
+const captionInput = newPostFormElement.querySelector("#post-caption");
+
+//*** Opening the modals ***
+
+//This function will open any modal that's passed onto it
+function openModal(modal) {
   modal.classList.add("modal_opened");
+}
+
+//Call the openModal function on the edit profile button click
+editProfileBtn.addEventListener("click", () => {
+  openModal(profileModal);
   //Insert the current profile name value into the form's input field
   nameInput.value = profileNameElement.textContent;
   //Insert the current profile job value into the form's input field
   jobInput.value = profileJobElement.textContent;
-}
+});
 
-// Closing the modal
-// Add event listener for when the close button is clicked
-// Call the function that closes the profile edit form
-closeBtn.addEventListener("click", closeModal);
-// In the function remove the class that set the modals visibility to visible
-// This will make the form invisible again
-function closeModal() {
+//Call the openModal function on the new post button click
+newPostBtn.addEventListener("click", () => {
+  openModal(newPostModal);
+});
+
+//*** Closing the modals ***
+
+//This function will close any modal that's passed onto it
+function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
-// The form submission handler. Note that its name
-// starts with a verb and concisely describes what it does.
+//Call the closeModal function on the edit profile close button click
+closeProfileBtn.addEventListener("click", () => {
+  closeModal(profileModal);
+});
+
+//Call the closeModal function on the close new post button click
+newPostCloseBtn.addEventListener("click", () => {
+  closeModal(newPostModal);
+});
+
+//*** Submitting the profile changes ***
+
+// The  profile form submission handler.
 function handleProfileFormSubmit(evt) {
-  // Prevent default browser behavior, see explanation below.
+  // Prevent default browser behavior
   evt.preventDefault();
 
-  // TODO: Get the values of each form field from the value property
+  // Get the values of each form field from the value property
   // of the corresponding input element.
   let nameInputValue = nameInput.value;
   let jobInputValue = jobInput.value;
-  // TODO: Then insert these new values into the textContent property of the
+  //Then insert these new values into the textContent property of the
   // corresponding profile elements.
   profileNameElement.textContent = nameInputValue;
   profileJobElement.textContent = jobInputValue;
   // TODO: Close the modal.
-  closeModal();
+  closeModal(profileModal);
 }
 
 // Connect the handler to the form, so it will watch for the submit event.
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+//*** Submitting the new post photos and captions ***
+
+function handleNewPostSubmit(evt) {
+  // Prevent default browser behavior
+  evt.preventDefault();
+
+  //Creatw a new post with user data
+  let newPost = { name: captionInput.value, link: imageLinkInput.value };
+  // Generate the card for the new post
+  let newCard = getCardElement(newPost);
+  //Add the new card to the cards list
+  cardsList.prepend(newCard);
+  //Close the modal
+  captionInput.value = "";
+  imageLinkInput.value = "";
+  closeModal(newPostModal);
+}
+
+// Connect the handler to the form, so it will watch for the submit event.
+newPostFormElement.addEventListener("submit", handleNewPostSubmit);
