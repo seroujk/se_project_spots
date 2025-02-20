@@ -35,22 +35,22 @@
               src="./images/plus.svg"
               alt="Plus icon"
               class="profile__add-btn-icon"
-            />New Post 
+            />New Post
           </button>
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
             <!-- We removed the hard coded card above and replaced it with the following card template-->
-             <template id="card__template">
+            <template id="card__template">
               <li class="card">
-                <img src="" alt="" class="card__image">
+                <img src="" alt="" class="card__image" />
                 <button class="card__delete-btn"></button>
-              <div class="card__content">
-                <h2 class="card__title"></h2>
-                <button class="card__like-btn"></button>
-              </div>
+                <div class="card__content">
+                  <h2 class="card__title"></h2>
+                  <button class="card__like-btn"></button>
+                </div>
               </li>
-             </template>
+            </template>
           </ul>
         </section>
       </main>
@@ -61,17 +61,39 @@
       <!-- edit profile modal -->
       <div class="modal" id="profile-edit-modal">
         <div class="modal__container">
-          <button type="button" class="modal__close-btn edit-profile__close-btn"></button>
+          <button
+            type="button"
+            class="modal__close-btn modal__close-btn--edit-profile"
+          ></button>
           <h2 class="modal__title">Edit profile</h2>
-          <form name="edit-profile" class="modal__form edit-profile-modal__form">
+          <form
+            name="edit-profile"
+            class="modal__form modal__form--edit-profile"
+          >
             <label for="name" class="modal__label"
-              >Name <input id="name" type="text" class="modal__input" placeholder="Type your name"/>
+              >Name
+              <input
+                id="name"
+                type="text"
+                class="modal__input"
+                placeholder="Type your name"
+              />
             </label>
             <label for="description" class="modal__label">
               Description
-              <input id="description" type="text" class="modal__input" placeholder="Describe yourself" />
+              <input
+                id="description"
+                type="text"
+                class="modal__input"
+                placeholder="Describe yourself"
+              />
             </label>
-            <button type="submit" class="modal__submit-btn edit-profile__submit-btn">Save</button>
+            <button
+              type="submit"
+              class="modal__submit-btn modal__submit-btn--edit-profile"
+            >
+              Save
+            </button>
           </form>
         </div>
       </div>
@@ -79,29 +101,47 @@
       <!-- add card modal -->
       <div class="modal" id="new-post-modal">
         <div class="modal__container">
-          <button type="button" class="modal__close-btn new-post__close-btn"></button>
+          <button
+            type="button"
+            class="modal__close-btn modal__close-btn--new-post"
+          ></button>
           <h2 class="modal__title">New Post</h2>
-          <form name="new-post" class="modal__form new-post-modal__form">
+          <form name="new-post" class="modal__form modal__form--new-post">
             <label for="image-link" class="modal__label"
-              >Image link <input id="image-link" type="text" class="modal__input" placeholder="Paste a link to the picture"/>
+              >Image link
+              <input
+                id="image-link"
+                type="text"
+                class="modal__input"
+                placeholder="Paste a link to the picture"
+              />
             </label>
             <label for="post-caption" class="modal__label">
               Caption
-              <input id="post-caption" type="text" class="modal__input" placeholder="Type you caption" />
+              <input
+                id="post-caption"
+                type="text"
+                class="modal__input"
+                placeholder="Type you caption"
+              />
             </label>
-            <button type="submit" class="modal__submit-btn new-post__submit-btn">Save</button>
+            <button
+              type="submit"
+              class="modal__submit-btn modal__submit-btn--new-post"
+            >
+              Save
+            </button>
           </form>
         </div>
       </div>
 
       <!-- preview modal -->
-       <div class="modal" id="preview-modal">
-        <div class="modal__content preview-modal__content">
-          <button type="button" class="preview-modal__close-btn"></button>
-          <img class="preview-modal__image" src="" alt="">
-          <p class="preview-modal__caption"></p>
+      <div class="modal" id="preview-modal">
+        <div class="modal__content modal__content--preview">
+          <button type="button" class="modal__close-btn--preview"></button>
+          <img class="modal__image--preview" src="#" alt="" />
+          <p class="modal__caption modal__caption--preview"></p>
         </div>
-       </div>
       </div>
     </div>
     <script src="./scripts/index.js" defer></script>

@@ -1,29 +1,41 @@
 const initialCards = [
-  (firstCard = {
+  {
     name: "Val Thorens",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
-  }),
-  (secondCard = {
+  },
+  {
     name: "Restaurant terrace",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
-  }),
-  (thirdCard = {
+  },
+  {
     name: "An outdoor cafe",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
-  }),
-  (fourthCard = {
+  },
+  {
     name: "A very long bridge, over the forest and through the trees",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
-  }),
-  (fifthCard = {
+  },
+  {
     name: "Tunnel with morning light",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
-  }),
-  (sixthCard = {
+  },
+  {
     name: "Mountain house",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
-  }),
+  },
 ];
+
+ //Declare a variable for the preview modal
+ const previewModal = document.querySelector("#preview-modal");
+ //Declare a variable for the preivew modal image
+ const previewImage = previewModal.querySelector(".modal__image--preview");
+
+ //Delcare a variable for the preview modal caption
+ const previewCaption = previewModal.querySelector(".modal__caption--preview");
+
+ //Declare a variable for the preview close button
+ const previewCloseBtn = previewModal.querySelector(".modal__close-btn--preview");
+
 
 //Generating Cards
 
@@ -47,31 +59,16 @@ function getCardElement(data) {
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
-  //Declare a variable for the preview modal
-  const previewModal = document.querySelector("#preview-modal");
-  //Declare a variable for the preivew modal image
-  const previewImage = previewModal.querySelector(".preview-modal__image");
-
-  //Delcare a variable for the preview modal caption
-  const previewCaption = previewModal.querySelector(".preview-modal__caption");
-  
-  //Declare a variable for the preview close button
-  const previewCloseBtn = previewModal.querySelector(
-    ".preview-modal__close-btn"
-  );
   //Open the preview modal when the image is clicked
   cardImage.addEventListener("click", () => {
     //Assign its src value to the current cards src value
     previewImage.src = data.link;
     previewImage.alt = data.name;
     previewCaption.textContent = data.name;
-    
+
     openModal(previewModal);
   });
-  //Close the preview modal when the close button is clicked
-  previewCloseBtn.addEventListener("click", () => {
-    closeModal(previewModal);
-  });
+
 
   // Declare a variable for the card like button
   const cardLikeBtn = cardElement.querySelector(".card__like-btn");
@@ -86,11 +83,16 @@ function getCardElement(data) {
   const cardDeleteBtn = cardElement.querySelector(".card__delete-btn");
   //Listen for a click event to delete the card
   cardDeleteBtn.addEventListener("click", (event) => {
-    event.target.closest(".card").remove();
+    cardElement.remove();
   });
 
   return cardElement;
 }
+
+  //Close the preview modal when the close button is clicked
+  previewCloseBtn.addEventListener("click", () => {
+    closeModal(previewModal);
+  });
 
 // use foreach method to initalize the cards
 // this way we don't have to worry about the length of the inital card array
@@ -102,12 +104,12 @@ initialCards.forEach((item) => {
 
 //The Edit Profile Modal
 
-let profileModal = document.querySelector("#profile-edit-modal");
-let editProfileBtn = document.querySelector(".profile__edit-btn");
-let closeProfileBtn = document.querySelector(".edit-profile__close-btn");
-let submiProfileBtn = document.querySelector(".edit-profile__close-btn");
+const profileModal = document.querySelector("#profile-edit-modal");
+const editProfileBtn = document.querySelector(".profile__edit-btn");
+const closeProfileBtn = document.querySelector(".modal__close-btn--edit-profile");
+const submitProfileBtn = document.querySelector(".modal__submit-btn--edit-profile");
 
-const profileFormElement = document.querySelector(".edit-profile-modal__form");
+const profileFormElement = document.querySelector(".modal__form--edit-profile");
 const nameInput = profileFormElement.querySelector("#name");
 const jobInput = profileFormElement.querySelector("#description");
 const profileNameElement = document.querySelector(".profile__name");
@@ -115,12 +117,12 @@ const profileJobElement = document.querySelector(".profile__description");
 
 // The New Post Modal
 
-let newPostModal = document.querySelector("#new-post-modal");
-let newPostBtn = document.querySelector(".profile__add-btn");
-let newPostCloseBtn = document.querySelector(".new-post__close-btn");
-let newPostSubmitBtn = document.querySelector(".new-post__submit-btn");
+const newPostModal = document.querySelector("#new-post-modal");
+const newPostBtn = document.querySelector(".profile__add-btn");
+const newPostCloseBtn = document.querySelector(".modal__close-btn--new-post");
+const newPostSubmitBtn = document.querySelector(".modal__submit-btn--new-post");
 
-const newPostFormElement = document.querySelector(".new-post-modal__form");
+const newPostFormElement = document.querySelector(".modal__form--new-post");
 const imageLinkInput = newPostFormElement.querySelector("#image-link");
 const captionInput = newPostFormElement.querySelector("#post-caption");
 
