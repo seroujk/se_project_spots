@@ -173,8 +173,8 @@ function handleProfileFormSubmit(evt) {
 
   // Get the values of each form field from the value property
   // of the corresponding input element.
-  let nameInputValue = nameInput.value;
-  let jobInputValue = jobInput.value;
+  const nameInputValue = nameInput.value;
+  const jobInputValue = jobInput.value;
   //Then insert these new values into the textContent property of the
   // corresponding profile elements.
   profileNameElement.textContent = nameInputValue;
@@ -193,9 +193,9 @@ function handleNewPostSubmit(evt) {
   evt.preventDefault();
 
   //Creatw a new post with user data
-  let newPost = { name: captionInput.value, link: imageLinkInput.value };
+  const newPost = { name: captionInput.value, link: imageLinkInput.value };
   // Generate the card for the new post
-  let newCard = getCardElement(newPost);
+  const newCard = getCardElement(newPost);
   //Add the new card to the cards list
   cardsList.prepend(newCard);
   //Close the modal
