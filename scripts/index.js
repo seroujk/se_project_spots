@@ -1,4 +1,5 @@
-import { resetFormValidation } from "./validation.js";
+import { disableButton, resetFormValidation } from "./validation.js";
+import { settings } from "./validation.js";
 
 const initialCards = [
   {
@@ -77,7 +78,6 @@ function getCardElement(data) {
 
   // Listen for a click event to change the color of the button
   cardLikeBtn.addEventListener("click", () => {
-    console.log("Like clicked");
     cardLikeBtn.classList.toggle("card__like-btn_liked");
   });
 
@@ -133,12 +133,13 @@ const captionInput = newPostFormElement.querySelector("#post-caption");
 //This function will open any modal that's passed onto it
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener('keydown', handleEscape);
 
 }
 
 //Call the openModal function on the edit profile button click
 editProfileBtn.addEventListener("click", () => {
-  resetFormValidation(profileFormElement);
+  resetFormValidation(profileFormElement,settings);
   openModal(profileModal);
   //Insert the current profile name value into the form's input field
   nameInput.value = profileNameElement.textContent;
@@ -156,6 +157,7 @@ newPostBtn.addEventListener("click", () => {
 //This function will close any modal that's passed onto it
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener('keydown', handleEscape);
 }
 
 //Call the closeModal function on the edit profile close button click
@@ -207,6 +209,7 @@ function handleNewPostSubmit(evt) {
   //Close the modal
   captionInput.value = "";
   imageLinkInput.value = "";
+  disableButton(newPostSubmitBtn);
   closeModal(newPostModal);
 }
 
@@ -215,23 +218,23 @@ newPostFormElement.addEventListener("submit", handleNewPostSubmit);
 
 
 //Call the closeModalfunction when the overlay is clicked
-document.addEventListener("click", (event) =>{
-  const modals = document.querySelectorAll(".modal");
-  modals.forEach((modal) =>{
-    if(event.target === modal){
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
       closeModal(modal);
     }
-  })
-
+  });
 });
 
 
 
-//Call the closeModalfunction when the ESCAPE key is pressed
-document.addEventListener("keydown", (event)=>{
-  if(event.key === 'Escape'){
-    closeModal(profileModal);
-    closeModal(newPostModal);
+//Call the closeModalfunction when the ESC Key is clicked
+
+function handleEscape(evt) {
+  console.log('escape is clicked');
+  if (evt.key === 'Escape') {
+    const openedModal = document.querySelector('.modal_opened');
+    closeModal(openedModal);
   }
-
-});
+}
