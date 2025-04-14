@@ -1,3 +1,5 @@
+import { resetFormValidation } from "./validation.js";
+
 const initialCards = [
   {
     name: "Val Thorens",
@@ -131,10 +133,12 @@ const captionInput = newPostFormElement.querySelector("#post-caption");
 //This function will open any modal that's passed onto it
 function openModal(modal) {
   modal.classList.add("modal_opened");
+
 }
 
 //Call the openModal function on the edit profile button click
 editProfileBtn.addEventListener("click", () => {
+  resetFormValidation(profileFormElement);
   openModal(profileModal);
   //Insert the current profile name value into the form's input field
   nameInput.value = profileNameElement.textContent;
@@ -163,6 +167,8 @@ closeProfileBtn.addEventListener("click", () => {
 newPostCloseBtn.addEventListener("click", () => {
   closeModal(newPostModal);
 });
+
+
 
 //*** Submitting the profile changes ***
 
@@ -206,3 +212,26 @@ function handleNewPostSubmit(evt) {
 
 // Connect the handler to the form, so it will watch for the submit event.
 newPostFormElement.addEventListener("submit", handleNewPostSubmit);
+
+
+//Call the closeModalfunction when the overlay is clicked
+document.addEventListener("click", (event) =>{
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) =>{
+    if(event.target === modal){
+      closeModal(modal);
+    }
+  })
+
+});
+
+
+
+//Call the closeModalfunction when the ESCAPE key is pressed
+document.addEventListener("keydown", (event)=>{
+  if(event.key === 'Escape'){
+    closeModal(profileModal);
+    closeModal(newPostModal);
+  }
+
+});
