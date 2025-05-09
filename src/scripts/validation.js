@@ -78,10 +78,10 @@ const enableValidation = (settings) => {
   });
 };
 
-enableValidation(settings);
+// enableValidation(settings);
 
 
-export const resetFormValidation = (formElement,settings) => {
+const resetFormValidation = (formElement,settings) => {
     const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
     const buttonElement = formElement.querySelector(settings.submitButtonSelector);
   
@@ -92,6 +92,4 @@ export const resetFormValidation = (formElement,settings) => {
     toggleButtonState(inputList, buttonElement, settings);
   };
 
-  export { enableValidation }; 
-  export { disableButton};
-  export {settings};
+  export { enableValidation, settings }; 

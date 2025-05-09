@@ -1,5 +1,18 @@
-import { disableButton, resetFormValidation } from "./validation.js";
-import { settings } from "./validation.js";
+import "./index.css";
+import { enableValidation, settings} from "../scripts/validation.js";
+
+import avatarSrc from "../images/avatar.jpg";
+const avatarImage = document.getElementById("image-avatar");
+avatarImage.src = avatarSrc;
+import pencilSrc from "../images/pencil.svg";
+const pencilImage = document.getElementById("image-pencil");
+pencilImage.src = pencilSrc;
+import plusSrc from "../images/plus.svg";
+const plusimage = document.getElementById("image-plus");
+plusimage.src = plusSrc;
+import logoSrc from "../images/logo.svg";
+const logoImage = document.getElementById("image-logo");
+logoImage.src = logoSrc;
 
 const initialCards = [
   {
@@ -139,7 +152,6 @@ function openModal(modal) {
 
 //Call the openModal function on the edit profile button click
 editProfileBtn.addEventListener("click", () => {
-  resetFormValidation(profileFormElement,settings);
   openModal(profileModal);
   //Insert the current profile name value into the form's input field
   nameInput.value = profileNameElement.textContent;
@@ -209,7 +221,6 @@ function handleNewPostSubmit(evt) {
   //Close the modal
   captionInput.value = "";
   imageLinkInput.value = "";
-  disableButton(newPostSubmitBtn);
   closeModal(newPostModal);
 }
 
@@ -238,3 +249,5 @@ function handleEscape(evt) {
     closeModal(openedModal);
   }
 }
+
+enableValidation(settings);
