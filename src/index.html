@@ -16,14 +16,21 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
+          <div class="profile__avatar-container">
+            <img
             id="image-avatar"
-            alt="Bessie Coleman"
+            alt="Profile picture"
             class="profile__avatar"
           />
+          <button type="button" class="profile__edit-avatar-btn">
+            <img id="white-image-pencil" alt="White pencil icon" />
+            <span>Edit Avatar</span>
+            </button>
+          </div>
+           
           <div class="profile__column">
-            <h1 class="profile__name">Bessie Coleman</h1>
-            <p class="profile__description">Civil Aviator</p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__description"></p>
             <button type="button" class="profile__edit-btn">
               <img id="image-pencil" alt="Pencil icon" />Edit Profile
             </button>
@@ -105,6 +112,39 @@
         </div>
       </div>
 
+       <!-- edit profile avatar modal -->
+      <div class="modal" id="profile-edit-avatar-modal">
+        <div class="modal__container">
+          <button
+            type="button"
+            class="modal__close-btn modal__close-btn--edit-profile-avatar"
+          ></button>
+          <h2 class="modal__title">Edit profile avatar</h2>
+          <form
+            name="edit-profile-avatar"
+            class="modal__form modal__form--edit-profile-avatar"
+            id="edit-avatar-modal"
+          >
+          <label for="image-link" class="modal__label"
+          >Profile Picture
+          <input
+            id="image-link"
+            type="url"
+            class="modal__input"
+            placeholder="Paste the link to an image"
+            required
+          />
+          <span class="modal__error image-link-error" ></span>
+            <button
+              type="submit"
+              class="modal__submit-btn modal__submit-btn--edit-avatar-profile"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+
       <!-- add card modal -->
       <div class="modal" id="new-post-modal">
         <div class="modal__container">
@@ -157,6 +197,34 @@
         </div>
       </div>
     </div>
-    <!-- <script type="module" src="./scripts/index.js" ></script> -->
+
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container">
+        <button
+          type="button"
+          class="modal__close-btn--preview modal__close-btn--delete-card"
+        ></button>
+        <h2 class="modal__title modal__title-delete-card">Are you sure you want to delete this image?</h2>
+        <div class="modal__card-delete-buttons-container">
+          <button
+            type="button"
+            class="modal__submit-btn modal__card-delete-btn"  
+          >
+            Delete
+          </button>
+          <button
+          type="button"
+          class="modal__submit-btn modal__card-delete-cancel-btn"
+        >
+          Cancel
+        </button> 
+        </div>
+          
+      </div>
+    </div>
+
+
+    </div>
+  
   </body>
 </html>

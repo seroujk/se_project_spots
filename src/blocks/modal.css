@@ -10,15 +10,15 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
-  opacity:0;
-  transition:visibility 0s linear 0.5s,opacity 0.5s linear;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
   padding: 0 16px;
 }
 
 .modal_opened {
   visibility: visible;
-  opacity:1;
-  transition-delay:0s;
+  opacity: 1;
+  transition-delay: 0s;
 }
 
 .modal__container {
@@ -50,6 +50,10 @@
   transition: opacity 0.2s ease-in-out;
 }
 
+.modal__close-btn--delete-card {
+  top: 0;
+}
+
 .modal__close-btn:hover {
   opacity: 100%;
 }
@@ -59,6 +63,11 @@
   line-height: 32px;
   font-size: 32px;
   color: rgba(33, 33, 33, 1);
+}
+
+.modal__title-delete-card {
+  font-size: 24px;
+  text-align: center;
 }
 
 .modal__form {
@@ -105,7 +114,6 @@
   line-height: 16px;
 }
 
-
 .modal__submit-btn {
   padding: 18px auto;
   width: 156px;
@@ -126,8 +134,37 @@
   opacity: 70%;
 }
 
-.modal__submit-btn_inactive{
-   background-color: rgb(144, 144, 144);
+.modal__card-delete-btn {
+  background-color: #ff6565;
+  color: #212121;
+}
+
+.modal__card-delete-btn:hover {
+  background-color: #ff3333;
+  color: #212121;
+  opacity: 100% !important;
+}
+
+.modal__card-delete-cancel-btn {
+  background-color: #ffffff;
+  color: #212121;
+  border: solid #212121 1px;
+}
+
+.modal__card-delete-cancel-btn:hover {
+  background-color: #212121;
+  color: #ffffff;
+  opacity: 100% !important;
+}
+
+.modal__card-delete-buttons-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.modal__submit-btn_inactive {
+  background-color: rgb(144, 144, 144);
 }
 
 .modal__content--preview {
@@ -146,10 +183,9 @@
   position: relative;
 }
 
-
 .modal__close-btn--preview {
   position: absolute;
-  left: 100%; 
+  left: 100%;
   margin-left: 12.5px;
   height: 40px;
   width: 40px;
@@ -163,10 +199,9 @@
   transition: opacity 0.2s ease-in-out;
 }
 
-.modal__close-btn--preview:hover{
+.modal__close-btn--preview:hover {
   opacity: 40%;
 }
-
 
 .modal__caption--preview {
   display: inline-flex;
@@ -182,16 +217,15 @@
   border-radius: 8px;
 }
 
-.modal__error{
+.modal__error {
   display: block;
-  color:rgba(255, 0, 0, 0.7);
+  color: rgba(255, 0, 0, 0.7);
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-weight: 500;
 }
 
-.modal__input_type_error{
+.modal__input_type_error {
   border-color: rgba(255, 0, 0, 0.7);
-
 }
 
 @media screen and (max-width: 627px) {
@@ -218,12 +252,11 @@
     height: 48px;
   }
 
-  .modal__input_type_error{
-    border-color: rgba(255, 0, 0, 0.7);;
+  .modal__input_type_error {
+    border-color: rgba(255, 0, 0, 0.7);
   }
 
-
-  .modal__label{
+  .modal__label {
     margin-bottom: 24px;
   }
 
@@ -241,22 +274,49 @@
     right: 12px;
   }
 
-  .modal__content--preview{
+  .modal__content--preview {
     justify-content: flex-start;
   }
 
-  .modal__close-btn--preview{
+  .modal__close-btn--preview {
     position: static;
     align-self: flex-end;
-   
   }
 
-  .modal__image--preview{
+  .modal__image--preview {
     border-radius: 4px;
     max-width: 90vw;
   }
 
   .modal__caption--preview {
     font-size: 16px;
-}
+  }
+
+  .modal__close-btn--delete-card{
+    position: absolute;
+    top:-46px;
+    left: 268px;
+    margin: 0;
+  }
+
+  .modal__card-delete-buttons-container {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal__card-delete-btn {
+    width: 156px;
+  }
+
+  .modal__card-delete-cancel-btn {
+    width: 156px;
+  }
+  .modal__card-delete-buttons-container{
+    align-items: center;
+  }
+
+  .modal__title-delete-card{
+    margin-bottom: 20px;
+    line-height: 120%;
+  }
 }
