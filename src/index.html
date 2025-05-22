@@ -74,6 +74,7 @@
           <form
             name="edit-profile"
             class="modal__form modal__form--edit-profile"
+            id="edit-profile-form"
           >
             <label for="name" class="modal__label"
               >Name
@@ -123,7 +124,7 @@
           <form
             name="edit-profile-avatar"
             class="modal__form modal__form--edit-profile-avatar"
-            id="edit-avatar-modal"
+            id="edit-avatar-form"
           >
           <label for="image-link" class="modal__label"
           >Profile Picture
@@ -153,7 +154,7 @@
             class="modal__close-btn modal__close-btn--new-post"
           ></button>
           <h2 class="modal__title">New Post</h2>
-          <form name="new-post" class="modal__form modal__form--new-post">
+          <form name="new-post" class="modal__form modal__form--new-post" id="new-post-form">
             <label for="image-link" class="modal__label"
               >Image link
               <input
@@ -191,7 +192,7 @@
       <!-- preview modal -->
       <div class="modal" id="preview-modal">
         <div class="modal__content modal__content--preview">
-          <button type="button" class="modal__close-btn--preview"></button>
+          <button type="button" class="modal__close-btn modal__close-btn--preview"></button>
           <img class="modal__image--preview" src="#" alt="" />
           <p class="modal__caption modal__caption--preview"></p>
         </div>
@@ -202,7 +203,7 @@
       <div class="modal__container">
         <button
           type="button"
-          class="modal__close-btn--preview modal__close-btn--delete-card"
+          class="modal__close-btn modal__close-btn--preview modal__close-btn--delete-card"
         ></button>
         <h2 class="modal__title modal__title-delete-card">Are you sure you want to delete this image?</h2>
         <div class="modal__card-delete-buttons-container">

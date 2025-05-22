@@ -103,7 +103,7 @@
 .profile__edit-btn {
   background-color: transparent;
   margin-top: auto;
-  display: none; /* Hidden by default */
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;

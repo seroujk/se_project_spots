@@ -1,6 +1,11 @@
 // === Styles and Validation ===
 import "./index.css";
-import { enableValidation, settings } from "../scripts/validation.js";
+import {
+  enableValidation,
+  settings,
+  resetFormValidation,
+  disableButton,
+} from "../scripts/validation.js";
 
 // === API and Constants ===
 import Api from "../utils/Api.js";
@@ -35,20 +40,14 @@ const api = new Api({
 // User Info
 const profileNameElement = document.querySelector(".profile__name");
 const profileJobElement = document.querySelector(".profile__description");
-const profileImageContainer = document.querySelector(
-  ".profile__avatar-container"
-);
 
 // Profile Modal
 const profileModal = document.querySelector("#profile-edit-modal");
 const editProfileBtn = document.querySelector(".profile__edit-btn");
-const closeProfileBtn = document.querySelector(
-  ".modal__close-btn--edit-profile"
-);
 const submitProfileBtn = document.querySelector(
   ".modal__submit-btn--edit-profile"
 );
-const profileFormElement = document.querySelector(".modal__form--edit-profile");
+const profileFormElement = document.forms["edit-profile-form"];
 const nameInput = profileFormElement.querySelector("#name");
 const jobInput = profileFormElement.querySelector("#description");
 
@@ -57,13 +56,10 @@ const profileEditImageBtn = document.querySelector(".profile__edit-avatar-btn");
 const profileEditImageModal = document.querySelector(
   "#profile-edit-avatar-modal"
 );
-const profileEditImageFormElement = document.querySelector(
-  "#edit-avatar-modal"
-);
+const profileEditImageFormElement = document.forms["edit-avatar-form"];
 const profileImageLinkInput =
   profileEditImageFormElement.querySelector("#image-link");
 const profileImage = document.querySelector(".profile__avatar");
-const profileImageEditCloseBtn = document.querySelector(".modal__close-btn--edit-profile-avatar");
 const profileImageSubmitBtn = profileEditImageFormElement.querySelector(
   ".modal__submit-btn--edit-avatar-profile"
 );
@@ -71,9 +67,8 @@ const profileImageSubmitBtn = profileEditImageFormElement.querySelector(
 // New Post Modal
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostBtn = document.querySelector(".profile__add-btn");
-const newPostCloseBtn = document.querySelector(".modal__close-btn--new-post");
 const newPostSubmitBtn = document.querySelector(".modal__submit-btn--new-post");
-const newPostFormElement = document.querySelector(".modal__form--new-post");
+const newPostFormElement = document.forms["new-post-form"];
 const imageLinkInput = newPostFormElement.querySelector("#image-link");
 const captionInput = newPostFormElement.querySelector("#post-caption");
 
@@ -83,17 +78,11 @@ const deletePostBtn = document.querySelector(".modal__card-delete-btn");
 const canelDeletePostBtn = document.querySelector(
   ".modal__card-delete-cancel-btn"
 );
-const deleteModalCloseBtn = document.querySelector(
-  ".modal__close-btn--delete-card"
-);
 
 // Preview Modal
 const previewModal = document.querySelector("#preview-modal");
 const previewImage = previewModal.querySelector(".modal__image--preview");
 const previewCaption = previewModal.querySelector(".modal__caption--preview");
-const previewCloseBtn = previewModal.querySelector(
-  ".modal__close-btn--preview"
-);
 
 // Cards
 const cardsList = document.querySelector(".cards__list");
@@ -150,7 +139,6 @@ function getCardElement(data) {
   });
 
   cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-btn_liked");
     handleCardLikeUnlike(cardLikeBtn, data);
   });
 
@@ -163,10 +151,16 @@ function getCardElement(data) {
 
 function handleCardLikeUnlike(cardLikeBtn, data) {
   selectedCardID = data._id;
-  if (cardLikeBtn.classList.contains("card__like-btn_liked")) {
-    api.addLike(selectedCardID).catch((err) => console.error(err));
+  if (!cardLikeBtn.classList.contains("card__like-btn_liked")) {
+    api
+      .addLike(selectedCardID)
+      .then(cardLikeBtn.classList.toggle("card__like-btn_liked"))
+      .catch((err) => console.error(err));
   } else {
-    api.removeLike(selectedCardID).catch((err) => console.error(err));
+    api
+      .removeLike(selectedCardID)
+      .then(cardLikeBtn.classList.toggle("card__like-btn_liked"))
+      .catch((err) => console.error(err));
   }
 }
 
@@ -199,21 +193,30 @@ editProfileBtn.addEventListener("click", () => {
   jobInput.value = profileJobElement.textContent;
 });
 
-newPostBtn.addEventListener("click", () => openModal(newPostModal));
+newPostBtn.addEventListener("click", () => {
+  openModal(newPostModal);
+  
+});
+
 profileEditImageBtn.addEventListener("click", () =>
   openModal(profileEditImageModal)
 );
 
 // Modal Close Events
-closeProfileBtn.addEventListener("click", () => closeModal(profileModal));
-newPostCloseBtn.addEventListener("click", () => closeModal(newPostModal));
+// Custom Delete Post Buttons Event Listeners
 deletePostBtn.addEventListener("click", handleDeleteSubmit);
 canelDeletePostBtn.addEventListener("click", () => closeModal(deletePostModal));
-deleteModalCloseBtn.addEventListener("click", () =>
-  closeModal(deletePostModal)
-);
-previewCloseBtn.addEventListener("click", () => closeModal(previewModal));
-profileImageEditCloseBtn.addEventListener("click", ()=> closeModal(profileEditImageModal));
+
+// Find all close buttons
+const closeButtons = document.querySelectorAll(".modal__close-btn");
+
+closeButtons.forEach((button) => {
+  // Find the closest popup only once
+  const popup = button.closest(".modal");
+  // Set the listener
+  button.addEventListener("click", () => closeModal(popup));
+});
+
 // Profile Form Submission
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 function handleProfileFormSubmit(evt) {
@@ -225,17 +228,18 @@ function handleProfileFormSubmit(evt) {
     .then((data) => {
       profileNameElement.textContent = data.name;
       profileJobElement.textContent = data.about;
+      closeModal(profileModal);
+      disableButton(submitProfileBtn);
     })
     .catch((err) => console.error(err))
     .finally(() => {
       submitProfileBtn.textContent = originalText;
     });
-
-  closeModal(profileModal);
 }
 
 // New Post Submission
 newPostFormElement.addEventListener("submit", handleNewPostSubmit);
+
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
   const originalText = newPostSubmitBtn.textContent;
@@ -245,45 +249,40 @@ function handleNewPostSubmit(evt) {
     .then((data) => {
       const newCard = getCardElement(data);
       cardsList.prepend(newCard);
+      captionInput.value = "";
+      imageLinkInput.value = "";
+      closeModal(newPostModal);
+      disableButton(newPostSubmitBtn);
     })
     .catch((err) => console.error(err))
     .finally(() => {
       newPostSubmitBtn.textContent = originalText;
     });
-  captionInput.value = "";
-  imageLinkInput.value = "";
-  closeModal(newPostModal);
 }
 
 // Profile Avatar Submission
-profileEditImageFormElement.addEventListener("submit", handleNewProfileImageSubmit);
+profileEditImageFormElement.addEventListener(
+  "submit",
+  handleNewProfileImageSubmit
+);
 
 function handleNewProfileImageSubmit(evt) {
-  console.log('Submit')
+  console.log("Submit");
   evt.preventDefault();
   const link = profileImageLinkInput.value;
   const originalText = profileImageSubmitBtn.textContent;
-  profileImageSubmitBtn.textContent = "Saving..."
+  profileImageSubmitBtn.textContent = "Saving...";
   api
-  .editProfileAvatar(link)
-  .then((userData)=>{
-    profileImage.src = userData.avatar;
-  })
-  .catch((err) => console.error(err))
-  .finally(()=>{
-    profileImageSubmitBtn.textContent= originalText;
-  });
-
-  closeModal(profileEditImageModal);
+    .editProfileAvatar(link)
+    .then((userData) => {
+      profileImage.src = userData.avatar;
+      closeModal(profileEditImageModal);
+    })
+    .catch((err) => console.error(err))
+    .finally(() => {
+      profileImageSubmitBtn.textContent = originalText;
+    });
 }
-
-// // Avatar Hover
-// profileImageContainer.addEventListener("mouseover", function () {
-//   profileEditImageBtn.style.display = "flex";
-// });
-// profileImageContainer.addEventListener("mouseout", function () {
-//   profileEditImageBtn.style.display = "none";
-// });
 
 // Modal Helpers
 function openModal(modal) {
