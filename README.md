@@ -1,29 +1,65 @@
 # Project 3: Spots
 
-Welcome to Spots! The premier desination for sharing your beautiful images. Wanted to share  your images on a website that fits all screen size perfectly? Well now you can. Have fun!
+Welcome to **Spots** — the premier destination for sharing your beautiful images.  
+Ever wanted to post photos on a responsive site that looks great on all screen sizes?  
+Now you can. Have fun!
 
-## Description
+---
 
-Spots consists of an image sharing website where each user has a profile.
-The user's profile constis of their name and a desscription.
-The user can edit the name and description at any time.
-The user can share images onto their profile.
-These images can also have captions written by the user.
-Each image that the user shares has a "like button" functionality enabling other users to
-"like" images that are shared on the site.
+## 📖 Description
 
-## Tech Stack
+Spots is an image-sharing website where each user has a personal profile.
 
-- HTML
-- CSS
-- Responsive Design
-- Javascript
+### Core Features:
+- Users can view and update their profile picture via image URLs.
+- Users can edit their profile name and description at any time.
+- Users can upload image posts with optional captions.
+- Each post supports:
+  - 👍 Like functionality
+  - 🗑️ Delete functionality
+- All user and post data is managed via external API calls — nothing is hard-coded.
 
-## Deployment
+---
 
-This webpage is deployed to GitHub Pages
+## 🧰 Tech Stack
 
-- Deployment Link: https://seroujk.github.io/se_project_spots/
+### 🔧 Frontend:
+- **HTML5** – Markup structure
+- **CSS3** – Custom styling
+- **Responsive Design** – Mobile-first layout
+- **JavaScript (ES6+)** – Core interactivity and logic
+- **Modular JavaScript** – ES module-based file structure
+- **Webpack** – Module bundler for JS, styles, and assets
+- **Form Validation** – Custom client-side validation logic
+- **DOM Manipulation** – Dynamic content rendering and user interactions
+- **SVG Assets** – Icon assets loaded dynamically via JS
 
-- Link to video explaining the project phase 1: https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link
-  
+### 🌐 Backend API:
+- **TripleTen REST API** – Remote backend
+- **API Features**:
+  - User profile management
+  - Post (card) CRUD operations
+  - Like/unlike functionality
+- **Authorization** – Token-based system
+- **Data Format** – JSON
+
+### 🛠️ Tools:
+- **Babel** – JavaScript transpilation (via Webpack)
+- **Git** – Version control
+- **GitHub** – Repository and deployment hosting
+
+---
+
+## 🚀 Deployment
+
+This project is deployed using **GitHub Pages**:
+
+- **Live Site**: [https://seroujk.github.io/se_project_spots/](https://seroujk.github.io/se_project_spots/)
+- **Project Phase 1 Walkthrough**: [Google Drive Folder](https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link)
+
+---
+
+## 📸 Screenshots (optional)
+_You can add screenshots of your UI here by uploading images and using:_
+```md
+![Description](./path-to-image.png)
