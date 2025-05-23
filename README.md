@@ -56,10 +56,3 @@ This project is deployed using **GitHub Pages**:
 
 - **Live Site**: [https://seroujk.github.io/se_project_spots/](https://seroujk.github.io/se_project_spots/)
 - **Project Phase 1 Walkthrough**: [Google Drive Folder](https://drive.google.com/drive/folders/1KD17damRnu_CTBFIfLPIjzZ1q7lNAYlR?usp=drive_link)
-
----
-
-## 📸 Screenshots (optional)
-_You can add screenshots of your UI here by uploading images and using:_
-```md
-![Description](./path-to-image.png)
